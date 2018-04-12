@@ -1,2 +1,2 @@
 [servers]
-xxx.xxx.xxx.xxx ansible_user=ubuntu ansible_ssh_private_key_file=path/to/private/key.pem
+52.224.223.155 ansible_user=devopsubuntu ansible_ssh_private_key_file=path/to/private/id_rsa

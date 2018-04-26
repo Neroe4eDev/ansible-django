@@ -3,7 +3,7 @@
 project_name: django_hello
 
 # the base path to install to. You should not need to change this.
-install_root: /home/devopsubuntu
+install_root: /home/{{ user }}
 
 # the python module path to your project's wsgi file. E.g. for a directory
 # layout like this (assuming `django_hello` is the project_name and top level
@@ -18,13 +18,14 @@ install_root: /home/devopsubuntu
 # ├── manage.py
 # └── requirements.txt
 # the correct wsgi_module value would be `hello.wsgi`
-wsgi_module: hello.wsgi
+#The source of the wsgi_module may be different depending on the project directory layout
+wsgi_module: {{ project_name }}.wsgi
 
 # any directories that need to be added to the PYTHONPATH.
 pythonpath: "{{ install_root }}/{{ project_name }}/"
 
 # the git repository URL for the project
-project_repo: git@github.com:Neroe4eDev/django-hello-world.git
+#project_repo: git@github.com:Neroe4eDev/django-hello-world.git
     
 # a private key that has access to the repository URL
 ssh_private_key: ~/.ssh/id_rsa
@@ -37,7 +38,7 @@ ssh_private_key: ~/.ssh/id_rsa
 static_root: "{{ install_root }}/{{ project_name }}/static"
 
 # the dns name or names (space separated) for your server
-server_name: 52.224.223.155
+#server_name: 52.224.223.155
 
 # database setup. Note that because this playbook doesn't touch the default 
 # postgres pg_hba.conf file, we use local password-based authentication for
@@ -63,7 +64,7 @@ db_password: changeme
 system_packages:
   - git
   - nginx
-  - gunicorn=19.4.5-1ubuntu1
+  - gunicorn
   - postgresql
   - postgresql-server-dev-all
   - python-pip

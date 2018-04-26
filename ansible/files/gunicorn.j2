@@ -10,5 +10,5 @@ chdir {{ install_root }}/{{ project_name }}
 
 env PYTHONPATH={{ install_root }}/{{ project_name }}:{{ pythonpath }}
 
-exec /usr/bin/gunicorn --workers 3 --bind 127.0.0.1:8000 {{ wsgi_module }}:application
+exec /usr/bin/gunicorn --workers 3 --bind 0.0.0.0:8000 {{ wsgi_module }}:application
 

@@ -17,20 +17,27 @@
       - restart gunicorn
 
     - name: copy nginx config
-      template: src=files/nginx.j2 dest=/etc/nginx/sites-enabled/{{ project_name }}.conf
-      notify:
-      - restart nginx
+      template: src=files/nginx.j2 dest=/etc/nginx/sites-available/default
+    
+    - name: Create symlink to default
+      file: src=/etc/nginx/sites-available/default dest=/etc/nginx/sites-enabled/default state=link
+      notify: nginx reload
 
     - name: django migrate
       django_manage: command=migrate app_path={{ install_root }}/{{ project_name }} pythonpath={{ pythonpath }}
-
-    - name: django collectstatic
-      django_manage: command=collectstatic app_path={{ install_root }}/{{ project_name }} pythonpath={{ pythonpath }}
 
     - name: copy gunicorn config
       template: src=files/gunicorn.j2 dest=/etc/init/gunicorn.conf
       notify:
       - restart gunicorn
+
+    - name: copy gunicorn service file
+      template: src=files/gunicorn-service.j2 dest=/etc/systemd/system/{{ project_name}}.service
+      notify:
+      - reload systemd
+      
+    - name: enable gunicorn service file
+      service: name={{ project_name }}.service state=started enabled=yes
 
     - name: make sure nginx server is running
       service: name=nginx state=started enabled=yes

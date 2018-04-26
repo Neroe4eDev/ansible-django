@@ -7,7 +7,7 @@ django project and deploy new versions of the project.
 
 ### Assumptions
 
-This playbook assumes you have created an Ubuntu 14.04 server and have already
+This playbook assumes you have created an Ubuntu 16.04 server and have already
 set up ssh public key authentication on it. Assuming you have provisioned a
 server from a cloud provider such as AWS or Digital Ocean, you should have
 downloaded the private key when generating the server, or specified a keypair
@@ -23,6 +23,7 @@ It also assumes you are cool with Postgresql as your database.
 - Edit the `ansible/hosts` file and enter the IP address of the server you are
 	deploying to and edit the path to the private key file.
 - Edit the `ansible/vars.yml` file and enter values appropriate for your project.
+- Edit/run through the `ansible/deploy.yml` and `ansible/provision.yml` files to ensure all the values entered are correct for your project. 
 - Run the playbook:
 
 	```

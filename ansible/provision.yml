@@ -11,10 +11,10 @@
       with_items: "{{ system_packages }}"
 
     - name: Save ssh key to server
-      copy: src={{ ssh_private_key }} dest=/home/devopsubuntu/.ssh/id_rsa mode=600
+      copy: src={{ ssh_private_key }} dest=/home/{{ user }}/.ssh/id_rsa mode=600
 
     - name: Create directory for app
-      file: path={{ install_root }}/{{ project_name }} state=directory owner=devopsubuntu group=www-data recurse=yes
+      file: path={{ install_root }}/{{ project_name }} state=directory owner={{ user }} group=www-data recurse=yes
 
     - name: make sure postgresql server is running
       service: name=postgresql state=started

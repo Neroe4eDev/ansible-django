@@ -1,6 +1,6 @@
 ---
-# a unix path-friendly name (IE, no spaces or special characters)
-project_name: django_hello
+# a unix path-friendly name (IE, no spaces or special characters), uncomment the following line and set to the correct project name
+#project_name: django_new
 
 # the base path to install to. You should not need to change this.
 install_root: /home/{{ user }}
